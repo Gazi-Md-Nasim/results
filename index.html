@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A secure student result lookup portal">
+  <title>NUBTK EEE students results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="NUBTK EEE results">
+        <span class="brand-mark" aria-hidden="true"><b>NUBTK</b></span>
+        <span>Result Desk</span>
+      </a>
+      <span class="session-label"><span class="status-dot"></span> Student portal</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Academic records of</p>
+          <h1>Dept. of<br><em>EEE.</em></h1>
+          <p class="intro">Enter your student ID to securely view your latest examination result.</p>
+        </div>
+
+        <div class="lookup-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Find your record</p>
+              <h2>Student result</h2>
+            </div>
+            <span class="lock-icon" aria-label="Private lookup" title="Private lookup">&#128274;</span>
+          </div>
+          <form id="lookup-form" novalidate>
+            <label for="student-id">Student ID</label>
+            <div class="input-row">
+              <input id="student-id" name="studentId" type="text" inputmode="text" autocomplete="off" placeholder="e.g. EEEXXXXXXXXXX" required>
+              <button type="submit">View result <span aria-hidden="true">&#8594;</span></button>
+            </div>
+            <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+          <div class="panel-footer"><span>Results are updated by your institution</span><span class="footer-line"></span></div>
+        </div>
+      </section>
+
+      <section id="result-section" class="result-section" aria-live="polite" hidden>
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">Verified record</p>
+            <h2 id="result-title">Your result</h2>
+          </div>
+          <button id="new-search" class="text-button" type="button">New search <span aria-hidden="true">&#8634;</span></button>
+        </div>
+        <div class="student-summary">
+          <div><span class="summary-label">Student</span><strong id="student-name">-</strong></div>
+          <div><span class="summary-label">Student ID</span><strong id="student-id-value">-</strong></div>
+          <div class="grade-badge"><span class="summary-label">Records found</span><strong id="result-count">-</strong></div>
+        </div>
+        <div class="marks-table-wrap">
+          <table>
+            <caption>Student result records</caption>
+            <thead><tr><th scope="col">Student name</th><th scope="col">Section</th><th scope="col">Course code</th><th scope="col">Semester</th><th scope="col">Marks of</th><th scope="col">Marks</th></tr></thead>
+            <tbody id="marks-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>&copy; Gazi Md Nasim</span><span>Need help? Contact dept. of EEE, NUBTK</span></footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
