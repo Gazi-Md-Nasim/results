@@ -22,12 +22,21 @@ function setMessage(text, isSuccess = false) {
   message.classList.toggle("success", isSuccess);
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 function showResult(result) {
   document.querySelector("#student-name").textContent = result[0].name;
   document.querySelector("#student-id-value").textContent = input.value.trim().toUpperCase();
   document.querySelector("#result-count").textContent = `${result.length} record${result.length === 1 ? "" : "s"}`;
   document.querySelector("#marks-body").innerHTML = result.map(record => `
-    <tr><td>${record.name}</td><td>${record.section}</td><td>${record.courseCode}</td><td>${record.semester}</td><td>${record.marksOf}</td><td>${record.result}</td></tr>
+    <tr><td>${escapeHtml(record.name)}</td><td>${escapeHtml(record.section)}</td><td>${escapeHtml(record.courseCode)}</td><td>${escapeHtml(record.semester)}</td><td>${escapeHtml(record.marksOf)}</td><td>${escapeHtml(record.result)}</td></tr>
   `).join("");
   resultSection.hidden = false;
   resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
