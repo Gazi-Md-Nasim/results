@@ -42,7 +42,7 @@ function showResult(result) {
   resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function requestResult(studentId) {
+function requestResult(studentId, attempt = 0) {
   if (!API_URL) {
     return Promise.resolve(demoResults[studentId] || null);
   }
@@ -52,6 +52,10 @@ function requestResult(studentId) {
     const script = document.createElement("script");
     const timeout = window.setTimeout(() => {
       cleanup();
+      if (attempt === 0) {
+        requestResult(studentId, 1).then(resolve, reject);
+        return;
+      }
       reject(new Error("The result service took too long to respond. Check your connection and try again."));
     }, 30000);
 
@@ -65,7 +69,14 @@ function requestResult(studentId) {
       cleanup();
       resolve(payload.found ? payload.results : null);
     };
-    script.onerror = () => { cleanup(); reject(new Error("The result service is unavailable. Check the Apps Script deployment access.")); };
+    script.onerror = () => {
+      cleanup();
+      if (attempt === 0) {
+        requestResult(studentId, 1).then(resolve, reject);
+        return;
+      }
+      reject(new Error("The result service is unavailable. Check the Apps Script deployment access."));
+    };
     script.src = `${API_URL}?id=${encodeURIComponent(studentId)}&callback=${callbackName}&_=${Date.now()}`;
     document.body.appendChild(script);
   });
@@ -93,7 +104,7 @@ form.addEventListener("submit", async event => {
     setMessage("Record found.", true);
     showResult(result);
   } catch (error) {
-    setMessage("The result service is unavailable. Please try again.");
+    setMessage(error.message || "The result service is unavailable. Please try again.");
   } finally {
     button.disabled = false;
   }
