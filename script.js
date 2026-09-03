@@ -84,7 +84,7 @@ form.addEventListener("submit", async event => {
     setMessage("Record found.", true);
     showResult(result);
   } catch (error) {
-    setMessage("The result service is unavailable. Please try again.", error);
+    setMessage("The result service is unavailable. Please try again.");
   } finally {
     button.disabled = false;
   }
