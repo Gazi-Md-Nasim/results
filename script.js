@@ -77,7 +77,7 @@ function requestResult(studentId, attempt = 0) {
         requestResult(studentId, 1).then(resolve, reject);
         return;
       }
-      reject(new Error("Chrome blocked the result service. Allow site data and third-party cookies, then try again."));
+      reject(new Error("Chrome blocked the result service. Allow site data and third-party cookies or switch to incognito mode, then try again."));
     };
     script.src = `${API_URL}?id=${encodeURIComponent(studentId)}&callback=${callbackName}&_=${Date.now()}`;
     document.body.appendChild(script);
