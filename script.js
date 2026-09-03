@@ -50,6 +50,8 @@ function requestResult(studentId, attempt = 0) {
   return new Promise((resolve, reject) => {
     const callbackName = `resultCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
     const script = document.createElement("script");
+    script.async = true;
+    script.referrerPolicy = "no-referrer";
     const timeout = window.setTimeout(() => {
       cleanup();
       if (attempt === 0) {
@@ -75,7 +77,7 @@ function requestResult(studentId, attempt = 0) {
         requestResult(studentId, 1).then(resolve, reject);
         return;
       }
-      reject(new Error("The result service is unavailable. Check the Apps Script deployment access."));
+      reject(new Error("Chrome blocked the result service. Allow site data and third-party cookies, then try again."));
     };
     script.src = `${API_URL}?id=${encodeURIComponent(studentId)}&callback=${callbackName}&_=${Date.now()}`;
     document.body.appendChild(script);
