@@ -39,12 +39,12 @@ function requestResult(studentId) {
   }
 
   return new Promise((resolve, reject) => {
-    const callbackName = `resultCallback_${Date.now()}`;
+    const callbackName = `resultCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
     const script = document.createElement("script");
     const timeout = window.setTimeout(() => {
       cleanup();
-      reject(new Error("The result service took too long to respond."));
-    }, 10000);
+      reject(new Error("The result service took too long to respond. Check your connection and try again."));
+    }, 30000);
 
     function cleanup() {
       window.clearTimeout(timeout);
@@ -56,8 +56,8 @@ function requestResult(studentId) {
       cleanup();
       resolve(payload.found ? payload.results : null);
     };
-    script.onerror = () => { cleanup(); reject(new Error("The result service is unavailable.")); };
-    script.src = `${API_URL}?id=${encodeURIComponent(studentId)}&callback=${callbackName}`;
+    script.onerror = () => { cleanup(); reject(new Error("The result service is unavailable. Check the Apps Script deployment access.")); };
+    script.src = `${API_URL}?id=${encodeURIComponent(studentId)}&callback=${callbackName}&_=${Date.now()}`;
     document.body.appendChild(script);
   });
 }
