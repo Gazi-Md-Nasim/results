@@ -51,7 +51,7 @@ button:hover { background: var(--accent-dark); transform: translateY(-1px); }
 .text-button:hover { color: var(--accent-dark); background: transparent; transform: none; }
 .student-summary { display: grid; grid-template-columns: 1.5fr 1fr .7fr; gap: 24px; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .summary-label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-.student-summary strong { font-family: "Space Grotesk", sans-serif; font-size: 16px; }
+.student-summary strong { font-family: "Space Grotesk", sans-serif; font-size: 20px; }
 .grade-badge { padding-left: 24px; border-left: 1px solid var(--line); }
 .grade-badge strong { color: var(--purple); font-size: 28px; }
 .marks-table-wrap { margin-top: 29px; overflow-x: auto; }
