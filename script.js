@@ -1,13 +1,13 @@
 // Add the deployed Apps Script /exec URL here when the Sheet is ready.
-const API_URL = "https://script.google.com/macros/s/AKfycbypm91jY0zjxoaaVWcr6n2-1nw4mgq86fWq_6nubC2EsCEvr6yak1IfVQuBbWfzdEqVPA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzu_xfW5g23onYUc7UVLjk_aCDuGeUGE12JFGFZYt1pwK0hes-8O4VcHU3AZxjabkRg/exec";
 
 const demoResults = {
   "STU-1001": [
-    { name: "Rahman", section: "A", courseCode: "CSE-101", semester: "Fall 2025", marksOf: "Final Exam", result: "A" },
-    { name: "Rahman", section: "A", courseCode: "MAT-110", semester: "Fall 2025", marksOf: "Final Exam", result: "A+" }
+    { name: "Rahman", section: "A", courseCode: "CSE-101", semester: "Fall 2025", caMarks: "24", midtermMarks: "22", finalExamMarks: "42", totalMarks: "88" },
+    { name: "Rahman", section: "A", courseCode: "MAT-110", semester: "Fall 2025", caMarks: "25", midtermMarks: "23", finalExamMarks: "44", totalMarks: "92" }
   ],
   "STU-2048": [
-    { name: "Noah", section: "B", courseCode: "ENG-120", semester: "Fall 2025", marksOf: "Final Exam", result: "B+" }
+    { name: "Noah", section: "B", courseCode: "ENG-120", semester: "Fall 2025", caMarks: "21", midtermMarks: "20", finalExamMarks: "38", totalMarks: "79" }
   ]
 };
 
@@ -36,7 +36,7 @@ function showResult(result) {
   document.querySelector("#student-id-value").textContent = input.value.trim().toUpperCase();
   document.querySelector("#result-count").textContent = `${result.length} record${result.length === 1 ? "" : "s"}`;
   document.querySelector("#marks-body").innerHTML = result.map(record => `
-    <tr><td>${escapeHtml(record.name)}</td><td>${escapeHtml(record.section)}</td><td>${escapeHtml(record.courseCode)}</td><td>${escapeHtml(record.semester)}</td><td>${escapeHtml(record.marksOf)}</td><td>${escapeHtml(record.result)}</td></tr>
+    <tr><td>${escapeHtml(record.courseCode)}</td><td>${escapeHtml(record.section)}</td><td>${escapeHtml(record.semester)}</td><td>${escapeHtml(record.caMarks)}</td><td>${escapeHtml(record.midtermMarks)}</td><td>${escapeHtml(record.finalExamMarks)}</td><td>${escapeHtml(record.totalMarks)}</td></tr>
   `).join("");
   resultSection.hidden = false;
   resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
